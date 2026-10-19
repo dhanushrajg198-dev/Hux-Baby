@@ -415,3 +415,31 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 450px) {
+  .hero-content {
+    align-items: start;
+  }
+  .hero-badge {
+    font-size: 12px;
+  }
+  .hero-title {
+    text-align: start;
+    font-size: 1.8rem;
+  }
+  .hero-tagline {
+    text-align: start;
+    font-size: 12px;
+    max-width: 360px;
+  }
+  .ghost-stage {
+    align-items: start;
+    padding: 0px;
+  }
+  .ghost-speech-bubble {
+    top: 8px;
+    span {
+      font-size: 12px;
+    }
+  }
+}
