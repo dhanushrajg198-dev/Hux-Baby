@@ -1,0 +1,715 @@
+/* ==========================================================================
+   Inventions & Creations Showcase Styling
+   ========================================================================== */
+
+/* Main Tabs for Inventions */
+.inventions-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.invention-tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  backdrop-filter: blur(8px);
+}
+
+.invention-tab-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text-main);
+  transform: translateY(-2px);
+}
+
+.invention-tab-btn.active {
+  background: linear-gradient(135deg, rgba(123, 156, 255, 0.25), rgba(194, 136, 248, 0.25));
+  border-color: var(--accent-primary);
+  color: var(--text-main);
+  box-shadow: 0 0 20px rgba(123, 156, 255, 0.3);
+}
+
+.invention-tab-btn .tab-badge {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--accent-gold);
+}
+
+.invention-panel {
+  display: none;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.invention-panel.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   Invention 1: Slumber Lanterns Studio
+   ========================================================================== */
+.lantern-studio-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 2.5rem;
+  align-items: stretch;
+}
+
+/* Left: Interactive Lantern Chamber */
+.lantern-stage-card {
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  min-height: 480px;
+}
+
+.lantern-holder {
+  position: relative;
+  width: 240px;
+  height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lantern-holder.float-away {
+  animation: lantern-release 3.2s ease-in-out forwards;
+}
+
+@keyframes lantern-release {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  40% { transform: translateY(-80px) rotate(4deg) scale(0.9); }
+  100% { transform: translateY(-400px) rotate(-6deg) scale(0.2); opacity: 0; }
+}
+
+/* Lantern Visual Anatomy */
+.lantern-frame {
+  position: relative;
+  width: 200px;
+  height: 300px;
+  z-index: 2;
+}
+
+.lantern-glow-bg {
+  position: absolute;
+  inset: 40px 30px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--lantern-curr-color, #ffd166) 0%, rgba(255, 209, 102, 0) 70%);
+  filter: blur(25px);
+  opacity: 0.75;
+  transition: all 0.5s ease;
+  z-index: 1;
+}
+
+.lantern-canvas-particles {
+  position: absolute;
+  top: 45px;
+  left: 25px;
+  width: 150px;
+  height: 190px;
+  border-radius: 60px 60px 40px 40px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.lantern-animal-silhouette {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  font-size: 3.5rem;
+  z-index: 3;
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.6));
+  animation: animal-breathe 4s ease-in-out infinite alternate;
+}
+
+@keyframes animal-breathe {
+  0% { transform: translate(-50%, -40%) scale(0.95); }
+  100% { transform: translate(-50%, -43%) scale(1.05); }
+}
+
+.lantern-active-status {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: var(--accent-gold);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Right: Lantern Customization Studio Controls */
+.lantern-controls-card {
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.control-group-title {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent-primary);
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Animal Selector Chips */
+.animal-selector-chips {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+}
+
+.animal-chip {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  padding: 0.6rem 0.5rem;
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: all var(--transition-fast);
+}
+
+.animal-chip span.emoji {
+  font-size: 1.4rem;
+}
+
+.animal-chip:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-main);
+  border-color: var(--accent-primary);
+}
+
+.animal-chip.active {
+  background: rgba(123, 156, 255, 0.2);
+  border-color: var(--accent-primary);
+  color: var(--text-main);
+  box-shadow: 0 0 12px rgba(123, 156, 255, 0.25);
+}
+
+/* Essence Color Palette */
+.essence-palette {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.essence-dot {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+
+.essence-dot:hover {
+  transform: scale(1.15);
+}
+
+.essence-dot.active {
+  transform: scale(1.22);
+  border-color: #ffffff;
+  box-shadow: 0 0 14px currentColor;
+}
+
+/* Ingredient Checkbox Toggles */
+.ingredients-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+
+.ingredient-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  padding: 0.5rem 0.8rem;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.ingredient-btn.active {
+  background: rgba(134, 227, 206, 0.15);
+  border-color: var(--accent-mint);
+  color: var(--text-main);
+}
+
+/* Slider */
+.slider-control {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.slider-control input[type="range"] {
+  flex: 1;
+  accent-color: var(--accent-primary);
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+}
+
+/* Dream Inscription Card */
+.dream-inscription-box {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px dashed var(--border-color);
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--accent-gold);
+  line-height: 1.5;
+  min-height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* ==========================================================================
+   Invention 2: The Celestial Chime Box
+   ========================================================================== */
+.chime-box-card {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  background: radial-gradient(circle at 50% 20%, rgba(35, 45, 80, 0.8), rgba(15, 20, 38, 0.9));
+  border: 1px solid var(--border-glow);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.chime-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+/* Preset Melodies */
+.lullaby-presets {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.preset-btn {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all var(--transition-fast);
+}
+
+.preset-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--text-main);
+  border-color: var(--accent-primary);
+}
+
+.preset-btn.playing {
+  background: var(--accent-primary);
+  color: #ffffff;
+  box-shadow: 0 0 15px rgba(123, 156, 255, 0.5);
+}
+
+/* Audio Reactive Waveform Visualizer */
+.audio-visualizer-canvas {
+  width: 100%;
+  height: 90px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* 8-Note Chime Celesta Keyboard */
+.chime-keys-container {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 0.8rem;
+  margin: 0.5rem 0;
+}
+
+.chime-key {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(123, 156, 255, 0.08) 100%);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  height: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 0.5rem;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.12s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.chime-key::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, var(--accent-mint) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.chime-key:hover {
+  transform: translateY(-6px);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(123, 156, 255, 0.2) 100%);
+  border-color: var(--accent-primary);
+}
+
+.chime-key:active, .chime-key.pressed {
+  transform: translateY(4px);
+  background: var(--accent-primary);
+  border-color: #ffffff;
+  box-shadow: 0 0 25px var(--accent-mint);
+}
+
+.chime-key.pressed::after {
+  opacity: 0.6;
+}
+
+.key-note {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.key-hint {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-sm);
+}
+
+.key-symbol {
+  font-size: 1rem;
+  color: var(--accent-gold);
+}
+
+/* Ambient Sound Mixers (Wind, Rain, Crickets, Ghost Hum) */
+.ambient-mixer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+}
+
+.ambient-channel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  text-align: center;
+}
+
+.ambient-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.ambient-channel input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent-mint);
+}
+
+/* ==========================================================================
+   Invention 3: Moonlit Bedtime Storybook & Tale Weaver
+   ========================================================================== */
+.storybook-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.storybook-subnav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.story-mode-btn {
+  padding: 0.6rem 1.4rem;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.story-mode-btn.active {
+  background: rgba(255, 209, 102, 0.2);
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+/* Storybook Reader Mode */
+.storybook-reader-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 460px;
+  background: #171b30;
+  border-radius: var(--radius-lg);
+  border: 2px solid rgba(255, 209, 102, 0.3);
+  box-shadow: var(--shadow-lg), inset 0 0 40px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Spine shadow in book */
+.storybook-reader-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 20px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0.4) 100%);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.book-page-left {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at 40% 40%, rgba(30, 37, 68, 0.8), #111425);
+  position: relative;
+  text-align: center;
+}
+
+.book-page-illustration {
+  width: 100%;
+  max-width: 280px;
+  height: 240px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+}
+
+.book-page-right {
+  padding: 3.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #15192c;
+  color: #e2e8f0;
+}
+
+.book-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-serif);
+  color: var(--accent-gold);
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+}
+
+.book-story-title {
+  font-size: 1.8rem;
+  margin: 1rem 0;
+  font-family: var(--font-serif);
+  color: var(--accent-gold);
+}
+
+.book-story-text {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #cbd5e1;
+}
+
+.book-nav-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Custom Bedtime Tale Weaver Mode */
+.tale-weaver-card {
+  padding: 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+}
+
+.weaver-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.weaver-select-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.weaver-select-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+}
+
+.weaver-select-group select {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  cursor: pointer;
+  outline: none;
+}
+
+.weaver-select-group select option {
+  background: #12182d;
+  color: #ffffff;
+}
+
+/* Generated Parchment Result */
+.parchment-scroll {
+  background: radial-gradient(circle, #252238 0%, #151324 100%);
+  border: 2px solid var(--accent-gold);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 0 30px rgba(255, 209, 102, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.parchment-scroll::before, .parchment-scroll::after {
+  content: '✦';
+  position: absolute;
+  color: var(--accent-gold);
+  font-size: 1.2rem;
+}
+.parchment-scroll::before { top: 15px; left: 15px; }
+.parchment-scroll::after { bottom: 15px; right: 15px; }
+
+.parchment-title {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: var(--accent-gold);
+  text-align: center;
+  margin-bottom: 1.2rem;
+}
+
+.parchment-body {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: #f1e9db;
+  font-style: italic;
+  min-height: 140px;
+}
+
+.parchment-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px dashed rgba(255, 209, 102, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .lantern-studio-grid,
+  .storybook-reader-card,
+  .tale-weaver-card {
+    grid-template-columns: 1fr;
+  }
+  .chime-keys-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .ambient-mixer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .storybook-reader-card::after {
+    display: none;
+  }
+}

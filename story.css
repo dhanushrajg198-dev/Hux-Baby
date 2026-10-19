@@ -1,0 +1,211 @@
+/* ==========================================================================
+   Origin Story: Scene-by-Scene Scrolling Journey
+   ========================================================================== */
+
+.origin-story-section {
+  position: relative;
+  padding: 6rem 0;
+  overflow: hidden;
+}
+
+.story-timeline-container {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Central glowing vine/timeline spine */
+.story-timeline-spine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 4px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, 
+    var(--accent-mint) 0%, 
+    var(--accent-primary) 35%, 
+    var(--accent-secondary) 70%, 
+    var(--accent-gold) 100%
+  );
+  border-radius: var(--radius-pill);
+  box-shadow: 0 0 16px var(--accent-primary);
+  z-index: 1;
+}
+
+/* Story Chapters / Scenes */
+.story-chapter {
+  position: relative;
+  margin-bottom: 5rem;
+  display: flex;
+  align-items: center;
+  z-index: 2;
+}
+
+.story-chapter:last-child {
+  margin-bottom: 0;
+}
+
+/* Alternate Left and Right */
+.story-chapter:nth-child(odd) {
+  flex-direction: row-reverse;
+}
+
+.chapter-content-box {
+  width: 45%;
+  padding: 2.2rem;
+  background: var(--bg-card);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  transition: all var(--transition-normal);
+}
+
+.chapter-content-box:hover {
+  border-color: var(--border-glow);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg), 0 0 25px rgba(123, 156, 255, 0.2);
+}
+
+/* Marker Node on Spine */
+.chapter-node-marker {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--bg-primary);
+  border: 3px solid var(--accent-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-gold);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  z-index: 5;
+  box-shadow: 0 0 18px var(--accent-gold);
+  transition: all 0.3s ease;
+}
+
+.story-chapter:hover .chapter-node-marker {
+  transform: translate(-50%, -50%) scale(1.2);
+  background: var(--accent-gold);
+  color: #0a0e1c;
+}
+
+.chapter-number-badge {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  margin-bottom: 0.5rem;
+}
+
+.chapter-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.chapter-text {
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 1.4rem;
+}
+
+/* Interactive Moment per Scene */
+.chapter-interactive-action {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px dashed var(--border-color);
+  padding: 0.9rem 1.2rem;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  transition: all var(--transition-fast);
+}
+
+.chapter-interactive-action.completed {
+  background: rgba(134, 227, 206, 0.15);
+  border-color: var(--accent-mint);
+  border-style: solid;
+}
+
+.chapter-interactive-action p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.chapter-action-btn {
+  background: var(--accent-primary);
+  color: #ffffff;
+  border: none;
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+
+.chapter-action-btn:hover {
+  background: var(--accent-secondary);
+  transform: scale(1.05);
+}
+
+.chapter-action-btn.done {
+  background: var(--accent-mint);
+  color: #0d1224;
+  cursor: default;
+}
+
+/* Chapter Visual Illustration side */
+.chapter-scene-art {
+  width: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 6rem;
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.3));
+  transition: transform 0.4s ease;
+}
+
+.story-chapter:hover .chapter-scene-art {
+  transform: scale(1.1) rotate(2deg);
+}
+
+/* Responsive Story Timeline */
+@media (max-width: 820px) {
+  .story-timeline-spine {
+    left: 25px;
+  }
+  .story-chapter {
+    flex-direction: column !important;
+    align-items: flex-start;
+    padding-left: 60px;
+    margin-bottom: 3.5rem;
+  }
+  .chapter-node-marker {
+    left: 25px;
+    top: 30px;
+  }
+  .chapter-content-box {
+    width: 100%;
+  }
+  .chapter-scene-art {
+    width: 100%;
+    margin-bottom: 1.5rem;
+    font-size: 4rem;
+  }
+}

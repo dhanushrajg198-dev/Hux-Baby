@@ -1,0 +1,417 @@
+/* ==========================================================================
+   Character Showcase & Barnaby's Interactive Sanctuary
+   ========================================================================== */
+
+/* Hero Section */
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-top: 80px;
+  overflow: hidden;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 3.5rem;
+}
+
+/* Hero Content */
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 1.2rem;
+  border-radius: var(--radius-pill);
+  background: rgba(123, 156, 255, 0.12);
+  border: 1px solid var(--border-glow);
+  color: var(--accent-gold);
+  font-size: 0.9rem;
+  font-weight: 600;
+  width: fit-content;
+  box-shadow: 0 0 15px rgba(255, 209, 102, 0.2);
+}
+
+.hero-title {
+  font-size: 3.8rem;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+}
+
+.hero-title span {
+  display: block;
+}
+
+.hero-tagline {
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  max-width: 540px;
+  line-height: 1.7;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+/* Barnaby Interactive Avatar Stage */
+.ghost-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.ghost-pedestal {
+  position: relative;
+  width: 320px;
+  height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ambient Glow behind Ghost */
+.ghost-aura {
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--ghost-glow) 0%, rgba(123, 156, 255, 0) 70%);
+  filter: blur(25px);
+  animation: aura-pulse 4s ease-in-out infinite alternate;
+  z-index: 1;
+}
+
+@keyframes aura-pulse {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.15);
+    opacity: 0.9;
+  }
+}
+
+/* Barnaby SVG Body & Rig */
+.barnaby-svg-container {
+  position: relative;
+  width: 260px;
+  height: 320px;
+  z-index: 2;
+  cursor: pointer;
+  user-select: none;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.25));
+  animation: ghost-float 3.8s ease-in-out infinite;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes ghost-float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-16px) rotate(-2deg);
+  }
+}
+
+/* Barnaby Interactive Reaction States */
+.barnaby-svg-container.giggle {
+  animation: ghost-giggle 0.6s ease-in-out;
+}
+
+.barnaby-svg-container.blush-active .ghost-blush {
+  opacity: 0.9 !important;
+  transform: scale(1.2);
+}
+
+.barnaby-svg-container.puff-up {
+  animation: ghost-puff 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.barnaby-svg-container.somersault {
+  animation: ghost-flip 1s ease-in-out;
+}
+
+@keyframes ghost-giggle {
+  0%,
+  100% {
+    transform: scale(1) rotate(0);
+  }
+  25% {
+    transform: scale(1.08) rotate(6deg) translateY(-8px);
+  }
+  50% {
+    transform: scale(0.96) rotate(-6deg) translateY(-4px);
+  }
+  75% {
+    transform: scale(1.05) rotate(4deg) translateY(-8px);
+  }
+}
+
+@keyframes ghost-puff {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.35, 1.2) translateY(-10px);
+  }
+  70% {
+    transform: scale(0.95, 1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes ghost-flip {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) translateY(-30px) scale(1.15);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+/* Dynamic Speech Bubble */
+.ghost-speech-bubble {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px);
+  background: var(--bg-card);
+  border: 1px solid var(--border-glow);
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-main);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 10;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  backdrop-filter: blur(12px);
+}
+
+.ghost-speech-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 8px 8px 0;
+  border-style: solid;
+  border-color: var(--border-color) transparent transparent transparent;
+}
+
+/* Barnaby Interaction Controls Toolbar */
+.ghost-interactions-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+  z-index: 5;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.5rem 0.8rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(8px);
+}
+
+.ghost-action-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all var(--transition-fast);
+}
+
+.ghost-action-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text-main);
+  transform: translateY(-1px);
+}
+
+.ghost-action-btn.active {
+  background: var(--accent-primary);
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   Character Profile & Dossier Section
+   ========================================================================== */
+.character-dossier {
+  margin-top: 3.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.dossier-card {
+  padding: 2.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.dossier-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1.2rem;
+}
+
+.dossier-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  background: rgba(123, 156, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  border: 1px solid var(--border-glow);
+}
+
+.dossier-name {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.dossier-role {
+  font-size: 0.9rem;
+  color: var(--accent-gold);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2rem;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-muted);
+}
+
+.stat-val {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+/* Quirks and Lore Card */
+.quirks-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.quirk-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+.quirk-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  margin-top: -2px;
+}
+
+.quirk-item strong {
+  color: var(--text-main);
+}
+
+/* Sleep Stage Radar / Meter */
+.sleep-radar-bar {
+  width: 100%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  position: relative;
+  margin-top: 0.5rem;
+}
+
+.sleep-radar-fill {
+  height: 100%;
+  width: 88%;
+  background: linear-gradient(
+    90deg,
+    var(--accent-mint),
+    var(--accent-primary),
+    var(--accent-secondary)
+  );
+  border-radius: var(--radius-pill);
+  animation: shimmer-bar 3s infinite linear;
+  background-size: 200% 100%;
+}
+
+@keyframes shimmer-bar {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2.5rem;
+  }
+  .hero-content {
+    align-items: center;
+  }
+  .hero-title {
+    font-size: 2.8rem;
+  }
+  .character-dossier {
+    grid-template-columns: 1fr;
+  }
+}
