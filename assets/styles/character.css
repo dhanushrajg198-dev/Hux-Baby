@@ -194,7 +194,7 @@
 /* Dynamic Speech Bubble */
 .ghost-speech-bubble {
   position: absolute;
-  top: -20px;
+  top: 20px;
   left: 50%;
   transform: translateX(-50%) translateY(-10px);
   background: var(--bg-card);
